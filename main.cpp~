@@ -1,0 +1,81 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+bool isLoggedin() {
+
+
+	string username;
+	string userpassword;
+	string un, pw;
+
+	cout << "type in username \n";
+	cin  >> username;
+	cout << "type in password \n";
+	cin  >> userpassword;
+
+
+	ifstream read("data" + username + ".txt");
+	getline(read, un);
+	getline(read, pw);
+
+		
+	if (un == username && pw == userpassword) {
+		return true;
+	}
+	else {
+		return false;
+	}	
+}
+
+
+
+
+
+int main() {
+
+
+
+	int userInput;
+	cout << "Press 1 to Login\n ";
+	cout << "Press 2 to create a new account\n";
+       	cin >> userInput;	
+	if (userInput == 1) {
+		
+			
+		bool status = isLoggedin();	
+	 	if (!status){
+		cout << " false login" << endl;
+		return 0;	
+			
+		}
+		else  {
+			cout << "login successfull" << endl;
+			return 1;
+			
+		}
+	}
+	else if (userInput == 2) {
+	string username, password; 
+	cout << "select a username \n";
+	cin >> username;
+	cout << "select a password \n";
+	cin >> password;
+
+	ofstream file;
+	file.open ("data" + username + ".txt");
+
+	file << username << endl << password;
+
+	file.close();
+	main();
+
+	
+		
+
+	}
+	
+}
+
+
